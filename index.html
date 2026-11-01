@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Portfolio of Mussadiq Nazeer — AI Master's student, software engineer, and builder of AI-powered products.">
   <meta name="theme-color" content="#10131a">
-  <title>Mussadiq Nazeer | Software Engineer & AI</title>
+  <title>Mussadiq Nazeer | Software Engineer</title>
   <style>
     :root {
       --bg: #0b0e14; --panel: #121722; --panel2: #171e2b; --text: #eef2f8;
@@ -17,6 +17,7 @@
     body { margin: 0; background: radial-gradient(ellipse at 78% 0%, rgba(115,136,255,.13), transparent 36%), var(--bg); color: var(--text); font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
     a { color: inherit; text-decoration: none; }
     a:hover { color: var(--accent); }
+    a:focus-visible, button:focus-visible { outline:3px solid var(--accent2); outline-offset:4px; border-radius:6px; }
     .wrap { width: min(var(--max), calc(100% - 40px)); margin: auto; }
     .nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(18px); background: rgba(11,14,20,.78); border-bottom: 1px solid var(--line); }
     .nav-inner { min-height: 72px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
@@ -26,7 +27,7 @@
     .nav-links a:hover { color: var(--text); }
     .menu-btn { display:none; border:1px solid var(--line); background:var(--panel); color:var(--text); padding:8px 12px; border-radius:12px; }
     .hero { padding: 94px 0 78px; display:grid; grid-template-columns: 1.4fr .8fr; align-items:center; gap:60px; }
-    .eyebrow { display:inline-flex; align-items:center; gap:9px; color:var(--accent); border:1px solid rgba(154,240,207,.25); background:rgba(154,240,207,.06); border-radius:999px; padding:7px 12px; font-size:.82rem; font-weight:650; }
+    .eyebrow { display:inline-flex; align-items:center; gap:9px; max-width:100%; flex-wrap:wrap; color:var(--accent); border:1px solid rgba(154,240,207,.25); background:rgba(154,240,207,.06); border-radius:999px; padding:7px 12px; font-size:.82rem; font-weight:650; }
     .dot { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
     h1 { font-size: clamp(2.7rem, 6vw, 5.3rem); line-height:1.03; letter-spacing:-.065em; margin:24px 0 22px; max-width: 760px; }
     h1 .highlight { color:var(--accent); }
@@ -78,6 +79,17 @@
     .achievement .number { color:var(--accent); font-size:1.6rem; font-weight:850; letter-spacing:-.05em; }
     .achievement h3 { margin:8px 0 5px; font-size:1rem; }
     .achievement p { color:var(--muted); font-size:.87rem; margin:0; }
+    .credential-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
+    .credential-card { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:22px; }
+    .credential-card h3 { margin:0 0 6px; font-size:1.04rem; }
+    .credential-card p { color:var(--muted); margin:7px 0; font-size:.91rem; }
+    .credential-card .meta { color:var(--accent); font-size:.82rem; font-weight:750; margin-bottom:9px; }
+    .credential-card a { color:var(--accent); font-weight:650; }
+    .credential-subhead { margin:30px 0 13px; font-size:1.12rem; letter-spacing:-.02em; }
+    .credential-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .credential-item { padding:17px 19px; background:var(--panel); border:1px solid var(--line); border-radius:15px; }
+    .credential-item strong { display:block; margin-bottom:4px; }
+    .credential-item span { color:var(--muted); font-size:.88rem; }
     .education-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     .edu h3 { margin:12px 0 4px; }
     .edu .meta { color:var(--accent); font-size:.84rem; font-weight:750; }
@@ -95,13 +107,15 @@
       .skill-groups, .achievement-grid { grid-template-columns:1fr 1fr; }
       .entry { grid-template-columns:1fr; gap:8px; }
       .section-head { align-items:start; flex-direction:column; }
-      .nav-links { display:none; position:absolute; top:72px; left:0; right:0; padding:18px 20px 22px; background:rgba(11,14,20,.98); border-bottom:1px solid var(--line); flex-direction:column; align-items:flex-start; }
+      .nav-links { display:flex; position:absolute; top:72px; left:0; right:0; padding:18px 20px 22px; background:rgba(11,14,20,.98); border-bottom:1px solid var(--line); flex-direction:column; align-items:flex-start; }
+      .js .nav-links { display:none; }
       .nav-links.open { display:flex; }
       .menu-btn { display:block; }
     }
     @media (max-width: 560px) {
-      .wrap { width:min(100% - 28px, var(--max)); }
+      .wrap { width:min(var(--max), calc(100% - 28px)); }
       .project-grid, .education-grid, .skill-groups, .achievement-grid { grid-template-columns:1fr; }
+      .credential-grid, .credential-list { grid-template-columns:1fr; }
       section { padding:58px 0; }
       .hero { padding:52px 0 58px; }
       .panel, .project, .entry { padding:19px; }
@@ -117,7 +131,7 @@
       <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <nav class="nav-links" id="navLinks" aria-label="Main navigation">
         <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a>
-        <a href="#education">Education</a><a href="#achievements">Achievements</a><a href="#contact">Contact</a>
+        <a href="#education">Education</a><a href="#certificates">Highlights</a><a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -173,7 +187,6 @@
     <section id="skills">
       <div class="wrap">
         <div class="section-head"><div><div class="kicker">02 / Toolkit</div><h2 class="section-title">Skills & technologies</h2></div></div>
-        <!-- <p class="section-intro">A practical mix of application engineering and AI experimentation.</p></div> -->
         <div class="skill-groups">
           <div class="panel skill-group"><h3>Languages</h3><p>C#, Python, Java, C, TypeScript, JavaScript, SQL, HTML, CSS</p><div class="pill-list"><span class="pill">Problem solving</span><span class="pill">Data structures</span></div></div>
           <div class="panel skill-group"><h3>Backend & frontend</h3><p>.NET Core, ASP.NET MVC, Angular, Flask, Node.js, Express, REST APIs</p><div class="pill-list"><span class="pill">Full stack</span><span class="pill">API design</span></div></div>
@@ -265,7 +278,7 @@
       </div>
     </section>
 
-    <section id="achievements">
+    <!-- <section id="achievements">
       <div class="wrap">
         <div class="section-head"><div><div class="kicker">06 / Recognition</div><h2 class="section-title">Achievements & competitions</h2></div><p class="section-intro">Competitive programming, academic performance, and a habit of learning through challenging problems.</p></div>
         <div class="achievement-grid">
@@ -277,22 +290,60 @@
           <article class="achievement"><div class="number">Honors</div><h3>University recognition</h3><p>Included on the Honors List during undergraduate studies.</p></article>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <section id="certificates">
       <div class="wrap">
-        <div class="section-head"><div><div class="kicker">07 / Credentials</div><h2 class="section-title">Certificates & publications</h2></div></div>
-        <div class="panel">
-          <p><strong>English proficiency:</strong> IELTS Academic — overall 7.0 (Listening 7.5, Reading 7.5, Writing 6.0, Speaking 6.0).</p>
-          <p><strong>Research / publication:</strong> Add the public paper or workshop link related to your GUI-agent evaluation work here once the publication details and public URL are confirmed.</p>
-          <p><strong>Other certificates:</strong> Add only verified certificates, ideally with issuer, date, and a public verification link.</p>
+        <div class="section-head">
+          <div><div class="kicker">06 / Highlights</div><h2 class="section-title">Research, Awards & Certifications</h2></div>
+          <p class="section-intro">Selected research, competitive-programming results, academic recognition, and professional learning.</p>
+        </div>
+
+        <h3 class="credential-subhead">Research & publications</h3>
+        <article class="credential-card">
+          <div class="meta">arXiv preprint · 2026</div>
+          <h3>GUI Agent: Guided Exploration of User-Sensitive Screens</h3>
+          <p>Research on guided exploration for GUI agents operating across user-sensitive screens.</p>
+          <p><strong>Authors:</strong> Aradhana Nayak, Mussadiq Nazeer, Wang Peng, and Feng Liu.</p>
+          <p>
+            <a href="https://arxiv.org/abs/2606.25705" target="_blank" rel="noreferrer">View paper on arXiv ↗</a>
+            &nbsp;·&nbsp;
+            <a href="https://arxiv.org/pdf/2606.25705" target="_blank" rel="noreferrer">Read PDF ↗</a>
+          </p>
+        </article>
+
+        <h3 class="credential-subhead">Awards & competitions</h3>
+        <div class="credential-list">
+          <article class="credential-item"><strong>ICPC Pakistan — Online Qualifier</strong><span>Gold · Rank #2 among 180+ teams</span></article>
+          <article class="credential-item"><strong>ICPC Pakistan — Onsite</strong><span>Bronze · Rank #11 among 50 teams</span></article>
+          <article class="credential-item"><strong>B.S. Software Engineering — Gold Medal</strong><span>Mohammad Ali Jinnah University · First position</span></article>
+          <article class="credential-item"><strong>German Collegiate Programming Contest 2025</strong><span>Rank #33 among 110+ teams</span></article>
+          <article class="credential-item"><strong>Code-Heist</strong><span>Intra-Uni Speed Programming Competition Winner</span></article>
+          <article class="credential-item"><strong>University Honors List</strong><span>Academic recognition during undergraduate studies</span></article>
+        </div>
+        <p class="small-note"><a class="btn" href="https://icpc.global/ICPCID/0A4MEUAJPEPV" target="_blank" rel="noopener noreferrer">See my ICPC profile ↗</a></p>
+
+        <h3 class="credential-subhead">Certifications & language</h3>
+        <div class="credential-grid">
+          <article class="credential-card">
+            <div class="meta">DeepLearning.AI</div>
+            <h3>AI Python for Beginners</h3>
+            <p>Course covering Python fundamentals and practical applications in AI workflows.</p>
+            <p><a href="https://www.deeplearning.ai/accomplishments/ec0c4b28-286e-4069-9889-6940ff61ae4a?usp=sharing" target="_blank" rel="noopener noreferrer">View certificate ↗</a></p>
+          </article>
+          <article class="credential-card">
+            <div class="meta">English proficiency</div>
+            <h3>IELTS Academic</h3>
+            <p><strong>Overall band score: 7.0</strong></p>
+            <!-- <p>Listening: 7.5 &nbsp;·&nbsp; Reading: 7.5<br>Writing: 6.0 &nbsp;·&nbsp; Speaking: 6.0</p> -->
+          </article>
         </div>
       </div>
     </section>
 
     <section id="contact">
       <div class="wrap contact">
-        <div><div class="kicker">08 / Contact</div><h2 class="section-title">Let’s build something meaningful.</h2><p class="section-intro" style="margin-top:16px">I’m interested in Werkstudent roles, internships, and entry-level opportunities in software engineering and AI engineering.</p></div>
+        <div><div class="kicker">07 / Contact</div><h2 class="section-title">Let’s build something meaningful.</h2><p class="section-intro" style="margin-top:16px">I’m interested in Werkstudent roles, internships, and entry-level opportunities in software engineering and AI engineering.</p></div>
         <div class="contact-card">
           <h3 style="margin-top:0">Connect with me</h3>
           <div class="contact-links">
@@ -307,6 +358,7 @@
   </main>
   <footer class="wrap"><span>© <span id="year"></span> Mussadiq Nazeer</span></footer>
   <script>
+    document.documentElement.classList.add('js');
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
     menuBtn.addEventListener('click', () => {
